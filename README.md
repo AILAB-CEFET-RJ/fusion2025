@@ -1,6 +1,6 @@
 # Fusion2025: Data Fusion for Precipitation Nowcasting in a Spatiotemporal Context
 
-In this repository we employ data fusion techniques to propose an algorithm that integrates pluviometric data from surface stations with observations from the ERA5 reanalysis model, incorporating data from the Sirenes, INMET, and AlertaRio station networks. 
+In this repository we employ data fusion techniques to propose an algorithm that integrates pluviometric data from surface stations with observations from the ERA5 reanalysis model, incorporating data from sirens (Websirens), Weather Stations (INMET) and Rain Gauge Stations (AlertaRio) networks. 
 
 
 ## Requirements
@@ -35,42 +35,57 @@ Final experiments (see Table 2 in the paper) compare STConvS2S (our architecture
 
 * `/output/arima` (for ARIMA models)
 	
-
+-->
 ## Usage
 
-First load the conda environment with the installed packages.
+For training and testing models using the different combinations of data sources with the data from ERA5 Reanalysis Model, you can use the following scripts.
 
+### ERA5 - Reanalysis Model (Only)
 ```
-source activate pytorch
-```
-
-Below are examples of how to run each model.
-
-### STConvS2S
-
-We provide two variants of the STConvS2S architecture that satisfy the causal constraint. Each can be executed as follows (complete example of how we performed the exepriments, [here](examples.md))
-
-#### STConvS2S-R (*applies a reverse function in the sequence*)
-
-```
-python main.py -i 3 -v 4 -m stconvs2s-r --plot > output/full-dataset/results/cfsr-stconvs2s-rmse-v4.out
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_era5_only_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_era5_only_19features" &> train_era5_only_2011_2024_1_channel.log &
 ```
 
-The above command executes STConvS2S-R (`-m stconvs2s-r`) in 3 iterations (`-i`), indicating the model version (`-v`), allowing the generation of plots in the training phase (`--plot`).
+### Alerta Rio - Rain Gauge Stations
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_alertario_only_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_alertario_only_19features" &> train_alertario_only_2011_2024_1_channel.log &
+```
 
-#### STConvS2S-C (*applies causal convolution*)
+### INMET - Weather Stations
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_inmet_only_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_inmet_only_19features" &> train_inmet_only_2011_2024_1_channel.log &
+```
 
-To run experiments with this architecture, switch to the `-m stconvs2s-c` parameter.
+### WebSirens - Sirens
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_sirenes_only_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_sirenes_only_19features" &> train_sirenes_only_2011_2024_1_channel.log &
+```
 
+### Alerta Rio - Rain Gauge Stations and INMET - Weather Stations
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_inmet_alertario_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_inmet+alertario_only_19features" &> train_inmet+alertario_only_2011_2024_1_channel.log &
+```
 
-### Additional parameters
+### Alerta Rio - Rain Gauge Stations and WebSirens - Sirens
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_websirenes_alertario_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_sirenes+alertario_19features" &> train_sirenes+alertario_2011_2024_1_channel.log &
+```
 
-* add `--chirps`: change the dataset to rainfall (CHIRPS). Default dataset: temperature (CFSR). 
-* add `-s 15`: change the horizon. Default horizon: 5.
-* add `-l 3 -d 32 -k 5`: define the number of layers (`l`), filters (`d`) and the kernel size (`-k`).
-* add `--email`: send email at the end. To use this functionality, set your email in the file [config/mail_config.ini](https://github.com/MLRG-CEFET-RJ/stconvs2s/blob/master/config/mail_config.ini).
-* add `--small-dataset`: have a quick training using a few sample dataset.
+### INMET - Weather Stations and WebSirens - Sirens
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_websirenes_inmet_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_sirenes+inmet_19features" &> train_sirenes+inmet_2011_2024_1_channel.log &
+```
 
+### Alerta Rio - Rain Gauge Stations, INMET - Weather Stations and WebSirens - Sirens
+```
+nohup python main.py -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot -dsp "data/output_dataset_websirenes_inmet_alertario_2011-01_2024-10.nc" -r "full-dataset_200epochs_0.0001LR_1channeltarget_2011-1_2024-10_sirenes+inmet+alertario_19features" &> train_sirenes+inmet+alertario_2011_2024_1_channel.log &
+```
+
+All experiment can be executed automatically using the following shell script:
+```
+./run_models.sh
+```
+
+<!---
 Check out the other possible parameters [here](https://github.com/MLRG-CEFET-RJ/stconvs2s/blob/master/main.py#L15-L34).
 
  ## Citation
