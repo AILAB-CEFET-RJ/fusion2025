@@ -1,7 +1,7 @@
 import math
 import torch
 import torch.nn as nn
-from tool.utils import Util
+from ..tool.utils import Util
 
 
 class TemporalGeneratorBlock(nn.Module):

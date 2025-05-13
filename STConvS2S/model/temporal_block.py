@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from tool.utils import Util
+from ..tool.utils import Util
 
 
 class TemporalReversedBlock(nn.Module):
