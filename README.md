@@ -38,52 +38,50 @@ conda activate atmoseer
 4- Evaluate the model with the MAE error, Bias, Confusion Matrix and F1-Score metrics.
 
 ```sh
- python -m evaluate_training.main --dataset "/home/user/ERA5+IA.nc" --model "/home/user/fusion2025/trained_models/ERA5+IA/checkpoints/stconvs2s-r/cfsr_step5_4_20250513-184502.pth.tar"
+python -m evaluate_training.main --dataset "/home/user/ERA5+SIA.nc" --model "/home/user/fusion2025/trained_models/ERA5+SIA-model.pth.tar"
 ```
 
 Expected output:
 ```sh
 Running evaluation with args:
-dataset: /home/felipe/rafaela-model/rafaela_model/models_evaluation/output_dataset_replaced-ERA5+IA.nc
-model: /home/felipe/fusion2025/trained_models/RunModels_replaced_ERA5+IA_camera-ready/checkpoints/stconvs2s-r/cfsr_step5_4_20250513-184502.pth.tar
+dataset: /home/user/ERA5+SIA.nc
+model: /home/user/fusion2025/trained_models/ERA5+SIA-model.pth.tar
 lead_time: 1
 
 # ...
 
-Rain Distribution (True): {'light': 52127, 'moderate': 1364, 'heavy': 168, 'extreme': 32}
-Rain Distribution (Pred): {'light': 51768, 'moderate': 1770, 'heavy': 135, 'extreme': 18}
+Rain Distribution (True): {'light': 51574, 'moderate': 1865, 'heavy': 207, 'extreme': 45}
+Rain Distribution (Pred): {'light': 50866, 'moderate': 2620, 'heavy': 180, 'extreme': 25}
 
 # ...
 
-MAE: {'0-5': 0.39043482214408665, '5-25': 7.104901246311378, '25-50': 19.30523035072145, '50-inf': 37.6655695438385}
-BIAS: {'0-5': 0.2547201734437317, '5-25': -2.8752870542213014, '25-50': -14.766394019126892, '50-inf': -36.00741457939148}
+MAE: {'0-5': 0.44631323257810807, '5-25': 6.687025476972155, '25-50': 20.360103851355216, '50-inf': 42.588324568006726}
+BIAS: {'0-5': 0.24514703574449076, '5-25': -1.57113556580633, '25-50': -18.280988034418815, '50-inf': -42.02639405992296}
 
 # ...
           0-5  5-25  25-50  50-inf
-0-5     51033  1066     25       3
-5-25      692   616     52       4
-25-50      40    75     45       8
-50-inf      3    13     13       3
-unique weights: [2.57500911e-01 9.84072581e+00 7.98973214e+01 4.19460938e+02]
-F1 Score for 0-5: 0.9824
-F1 Score for 5-25: 0.3931
-F1 Score for 25-50: 0.2970
-F1 Score for 50-inf: 0.1200
+0-5     50032  1492     45       5
+5-25      785   980     85      15
+25-50      47   119     38       3
+50-inf      2    29     12       2
+unique weights: [2.60261954e-01 7.19718499e+00 6.48442029e+01 2.98283333e+02]
+F1 Score for 0-5: 0.9768
+F1 Score for 5-25: 0.4370
+F1 Score for 25-50: 0.1964
+F1 Score for 50-inf: 0.0571
 f1_per_class_T+1.pkl written
     Writting f1_score_weighted.pkl:
-    ./models_evaluation/output_dataset_replaced-ERA5+IA.nc/f1_score_weighted.pkl
-    f1_weighted=0.3899858740214056
+    ./models_evaluation/output_dataset_replaced-ERA5+SIA.nc/f1_score_weighted.pkl
+    f1_weighted=0.35905292925986854
 
-
-    Writting f1_score_macro.pkl:
-    ./models_evaluation/output_dataset_replaced-ERA5+IA.nc/f1_score_macro.pkl
-    f1_macro=0.4481333100795569
+    ./models_evaluation/output_dataset_replaced-ERA5+SIA.nc/f1_score_macro.pkl
+    f1_macro=0.41683587109105374
 ```
 
 This script will also generate the following files during evaluation, which provides a model performance visualization and a serialized model report, for later analysis and comparison with other models:
 ```sh
 models_evaluation
-   └── output_dataset_replaced-ERA5+IA.nc
+   └── ERA5+SIA.nc
         ├── [0-5)_confusion_matrix.png
         ├── [25-50)_confusion_matrix.png
         ├── [5-25)_confusion_matrix.png

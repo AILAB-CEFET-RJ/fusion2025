@@ -465,12 +465,6 @@ if __name__ == "__main__":
     print("extreme percentage:", np.round(d, 2))
     print("Total percentage:", a + b + c + d)
 
-    print("Rain Distribution:")
-    print(rain_distribution)
-
-    print("Rain Distribution (Pred):")
-    print(rain_distribution_true)
-
     assert rain_distribution_true["extreme"] == level_50_inf["true"]
     assert rain_distribution_true["heavy"] == level_25_50["true"]
     assert rain_distribution_true["moderate"] == level_5_25["true"]
