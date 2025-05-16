@@ -6,8 +6,8 @@ import traceback
 import numpy as np
 import os
 import argparse as arg
-from tool.utils import Util
-from ml_builder import MLBuilder
+from .tool.utils import Util
+from .ml_builder import MLBuilder
 import torch
 
 def get_arguments():

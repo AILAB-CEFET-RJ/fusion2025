@@ -1,7 +1,7 @@
 import argparse
+import os
 import pickle
 from pathlib import Path
-import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -41,7 +41,7 @@ def clean_precipitation_data(data, threshold=0.01, extreme_threshold=150.0, verb
         data[:, t, :, :, 0][mask] = 0
 
     if verbose:
-        print(f"=== Extreme Precipitation Removal ({property}) ===")
+        print("=== Extreme Precipitation Removal ===")
         print(f"Total extreme values (>{extreme_threshold} mm/h) removed: {total_extremes}")
         print(f"Percentage of data removed: {100 * total_extremes / data.size:.6f}%")
         print(f"Maximum extreme value: {max_extreme}")
@@ -66,6 +66,7 @@ def extract_filename_from_dataset_path(dataset: str):
 
 
 if __name__ == "__main__":
+    # python -m evaluate_training.main --dataset "/home/user/ERA5+SIA.nc" --model "/home/user/fusion2025/trained_models/ERA5+SIA-model.pth.tar"
     parser = argparse.ArgumentParser(description="Evaluate the model")
     parser.add_argument(
         "--dataset",

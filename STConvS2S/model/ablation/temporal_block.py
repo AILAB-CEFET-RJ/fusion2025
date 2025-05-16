@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from tool.utils import Util
+from ...tool.utils import Util
 
 class TemporalReversedBlock(nn.Module):
     def __init__(self, input_size, num_layers, kernel_size, in_channels, out_channels, dropout_rate, step):

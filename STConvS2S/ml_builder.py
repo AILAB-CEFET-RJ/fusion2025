@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 import time as tm
 import os
 
-from model.stconvs2s import STConvS2S_R, STConvS2S_C
-from model.baselines import *
-from model.ablation import *
+from .model.stconvs2s import STConvS2S_R, STConvS2S_C
+from .model.baselines import *
+from .model.ablation import *
  
-from tool.train_evaluate import Trainer, Evaluator
-from tool.dataset import NetCDFDataset
-from tool.loss import RMSELoss, MAELoss
-from tool.utils import Util
+from .tool.train_evaluate import Trainer, Evaluator
+from .tool.dataset import NetCDFDataset
+from .tool.loss import RMSELoss, MAELoss
+from .tool.utils import Util
 
 import torch
 import torch.nn as nn

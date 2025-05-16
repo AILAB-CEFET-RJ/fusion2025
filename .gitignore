@@ -1,6 +1,8 @@
 models_evaluation
 trained_models
 
+inference_grid_figures/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

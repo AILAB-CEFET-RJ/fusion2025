@@ -4,7 +4,7 @@
 
 import torch
 import torch.nn as nn
-from tool.utils import Util
+from ...tool.utils import Util
 
 class PredRNN(nn.Module):
     def __init__(self, input_size, num_layers, hidden_dim, kernel_size, device, dropout_rate, step=5):

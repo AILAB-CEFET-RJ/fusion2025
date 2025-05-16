@@ -5,7 +5,7 @@
 
 import torch
 import torch.nn as nn
-from tool.utils import Util
+from ...tool.utils import Util
 
 
 class Endocer_Decoder3D(nn.Module):

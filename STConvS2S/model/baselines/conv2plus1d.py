@@ -1,7 +1,7 @@
 import torch.nn as nn
 import math
 
-from tool.utils import Util
+from STConvS2S.tool.utils import Util
 
 
 class Conv2Plus1D(nn.Module):

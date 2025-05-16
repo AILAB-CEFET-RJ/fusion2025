@@ -2,9 +2,7 @@
 
 Code for the paper "Towards a Spatiotemporal Fusion Approach to Precipitation Nowcasting"
 
-Link 1 - 
-
-Link 2 - 
+<img src="./.github/fusion2025-repo-image.png" alt="Fusion 2025" height="400px"/>
 
 ## Abstract
 
@@ -33,6 +31,13 @@ mv <path_to_downloaded_dataset> fusion2025-spatiotemporal-precipitation-nowcasti
 ```sh
 conda env create -f environment.yml -n atmoseer
 conda activate atmoseer
+```
+
+4- Download the trained model from zenodo and place it in the `STConvS2s/trained_models` folder:
+
+Optionally, instead of downloading the already trained model from zenodo, we may execute the STConvS2S train script with the instructions below:
+```sh
+python -m STConvS2S.main --cuda 1 -i 1 -v 4 -m stconvs2s-r -e 200 -p 100 --plot --dropout 0.5 -dsp "data/ERA5+SIA.nc"" -r "RunModels_ERA5+SIA"
 ```
 
 4- Evaluate the model with the MAE error, Bias, Confusion Matrix and F1-Score metrics.
@@ -108,4 +113,31 @@ There's a shell script `STConvS2s/run_models.sh` that help us to run the trainin
 
 ## Replicating the inference experiments
 
-trazer o script e o dataset irmaõ, vai dar certo em nome de JESUS!
+This section replicates the inference experiments using the ERA5+SIA trained model with the GFS NWP model integrated with AlertaRio (`GFS+A`) dataset.
+
+```sh
+python -m evaluate_inference.main --dataset /home/user/GFS+A_dataloader.pt
+```
+
+Expected output in stdout:
+```sh
+Loading inference dataset from ./GFS+A_dataloader.pt
+max output:  tensor(36.1225)
+min output:  tensor(0.)
+Saved figure to ./inference_grid_figures/iteration_0/tp_figure.png
+Confusion matrix:
+\begin{tabular}{lrrrr}
+\toprule
+ & 0-5 & 5-25 & 25-50 & 50-inf \\
+\midrule
+0-5 & 6 & 4 & 1 & 0 \\
+5-25 & 0 & 2 & 1 & 0 \\
+25-50 & 0 & 1 & 0 & 0 \\
+50-inf & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+```
+
+## Atmoseer
+
+The code used to create the datasets can found at the [Atmoseer package](https://github.com/AILAB-CEFET-RJ/atmoseer/tree/main/src/spatiotemporal_builder/). It is part of the Artificial Intelligence Laboratory (AI-Lab) at CEFET/RJ, maintained by the authors of this paper.
