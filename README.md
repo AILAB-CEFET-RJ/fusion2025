@@ -10,7 +10,7 @@ Datasets and Models:
 
 ## Abstract
 
-With the increasing availability of meteorological data from various sensors, numerical models and reanalysis products, the need for efficient data integration methods has become paramount for improving weather forecasts and hydrometeorological studies. In this work, we propose a data fusion approach for precipitation nowcasting by integrating data from meteorological and rain gauge stations in Rio de Janeiro metropolitan area with ERA5 reanalysis data and GFS numerical weather prediction. We employ the spatiotemporal deep learning architecture called STConvS2S, leveraging a structured dataset covering a 9 x 11 grid. The study spans from January 2011 to October 2024, and we evaluate the impact of integrating three surface station systems. Among the tested configurations, the fusion-based model achieves an F1-score of 0.2033 for forecasting heavy precipitation events (greater than 25 mm/h) at a one-hour lead time. Additionally, we present an ablation study to assess the contribution of each station network and propose a refined inference strategy for precipitation nowcasting, integrating the GFS numerical weather prediction (NWP) data with in-situ observations.
+With the increasing availability of meteorological data from various sensors, numerical models and reanalysis products, the need for efficient data integration methods has become paramount for improving weather forecasts and hydrometeorological studies. In this work, we propose a data fusion approach for precipitation nowcasting by integrating data from meteorological and rain gauge stations in Rio de Janeiro metropolitan area with ERA5 reanalysis data and GFS numerical weather prediction. We employ the spatiotemporal deep learning architecture called STConvS2S, leveraging a structured dataset covering a 9 x 11 grid. The study spans from January 2011 to October 2024, and we evaluate the impact of integrating three surface station systems. Among the tested configurations, the fusion-based model achieves an F1-score of 0.1964 for forecasting heavy precipitation events (greater than 25 mm/h) at a one-hour lead time. Additionally, we present an experimental assessment of the contribution of each station network and propose a refined inference strategy for precipitation nowcasting, integrating the GFS numerical weather prediction (NWP) data with in-situ observations.
 
 ## Replicating the training experiments
 
@@ -140,7 +140,7 @@ There's a shell script `STConvS2s/run_models.sh` that help us to run the trainin
 | ERA5+SI | ✓ | ✓ |  |
 | ERA5+SA | ✓ |  | ✓ |
 | ERA5+IA |  | ✓ | ✓ |
-| ERA5+IA | ✓ | ✓ | ✓ |
+| ERA5+SIA | ✓ | ✓ | ✓ |
 <!-- table with different datasets -->
 
 ## Replicating the inference experiments
