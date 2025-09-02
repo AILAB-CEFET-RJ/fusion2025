@@ -4,6 +4,10 @@ Code for the paper "Towards a Spatiotemporal Fusion Approach to Precipitation No
 
 <img src="./.github/fusion2025-repo-image.png" alt="Fusion 2025" height="400px"/>
 
+Conference Paper DOI: [10.23919/FUSION65864.2025.11123942](https://doi.org/10.23919/FUSION65864.2025.11123942)
+
+[![DOI:10.23919/FUSION65864.2025.11123942](https://img.shields.io/badge/DOI-10.23919%2FFUSION65864.2025.11123942-blue)](https://doi.org/10.23919/FUSION65864.2025.11123942)
+
 Datasets and Models:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14941806.svg)](https://doi.org/10.5281/zenodo.14941806)
